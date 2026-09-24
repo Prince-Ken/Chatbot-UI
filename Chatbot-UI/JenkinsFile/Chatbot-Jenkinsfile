@@ -9,12 +9,15 @@ pipeline{
         DOCKER_IMAGE='taahken/chatbot-ui'
         IMAGE_TAG="${BUILD_NUMBER}"
     }
-    stages {
-        stage('Checkout from Git'){
-            steps{
-                git branch: 'main', url: 'https://github.com/Prince-Ken/Chatbot-UI.git'
-            }
-        }
+            stages {
+                    checkout scmGit(
+            branches: [[name: '*/main']],
+            userRemoteConfigs: [[
+                url: 'https://github.com/Prince-Ken/Chatbot-UI.git'
+            ]]
+        )
+
+
         stage('Install Dependencies') {
             steps {
                 sh "npm ci"

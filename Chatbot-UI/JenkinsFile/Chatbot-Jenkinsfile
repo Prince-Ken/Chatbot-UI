@@ -10,17 +10,21 @@ pipeline{
         IMAGE_TAG="${BUILD_NUMBER}"
     }
          stages{
-            stage ('checkout scmGit')
-            {
-                steps{
-                        scmGit(
-                branches: [[name: '*/main']],
-                userRemoteConfigs: [[
-                    url: 'https://github.com/Prince-Ken/Chatbot-UI.git'
-                ]]
+
+
+
+
+        stage('Checkout') {
+            steps {
+                checkout scmGit(
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/Prince-Ken/Chatbot-UI.git'
+                    ]]
                 )
-             }
+            }
         }
+
 
 
         stage('Install Dependencies') {
